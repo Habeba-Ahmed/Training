@@ -9,34 +9,46 @@ class CustomAuthSocialSection extends StatelessWidget {
   final String normalText;
   final String actionText;
   final void Function() onPressed;
-  const CustomAuthSocialSection({super.key, required this.normalText, required this.actionText,required this.onPressed});
+  final double width;
+  final double hight;
+  const CustomAuthSocialSection({
+    super.key, 
+    required this.normalText, 
+    required this.actionText,
+    required this.onPressed, 
+    required this.width, 
+    required this.hight});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width : 194,
-      height : 136,
+      width : width,
+      height : hight,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('- OR Continue with -',style: AppTextStyle.orContinueText,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              
-              CustomSocialCircleIcon(
-                widget: SizedBox(
-                  height : 24,
-                  width : 24,
-                  child: Image.asset(AppImages.google,fit: BoxFit.contain,))),
-              
-              CustomSocialCircleIcon(
-                widget: Icon(Icons.apple,size: 25,color: AppColor.blackColor,)),
-              
-              CustomSocialCircleIcon(
-                widget: Icon(Icons.facebook_rounded,size: 25,color:  Color(0xff3D4DA6))),
-              
-            ],
+          SizedBox(height : 10,),
+          Center(
+            child: Row(
+              spacing : 10 ,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                CustomSocialCircleIcon(
+                  widget: SizedBox(
+                    height : 24,
+                    width : 24,
+                    child: Image.asset(AppImages.google,fit: BoxFit.contain,))),
+                
+                CustomSocialCircleIcon(
+                  widget: Icon(Icons.apple,size: 25,color: AppColor.blackColor,)),
+                
+                CustomSocialCircleIcon(
+                  widget: Icon(Icons.facebook_rounded,size: 25,color:  Color(0xff3D4DA6))),
+                
+              ],
+            ),
           ),
 
           CustomAuthBottomText(

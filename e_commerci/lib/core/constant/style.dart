@@ -82,4 +82,18 @@ class AppTextStyle{
             decorationColor: AppColor.secoundColor
           );
 
+  static final TextStyle agreementText=TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: AppColor.hintcolor,
+            fontFamily: 'Montserrat',
+          );
+
+  static final TextStyle registerText=TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: AppColor.primaryColor,
+            fontFamily: 'Montserrat',
+          );
+
 }
