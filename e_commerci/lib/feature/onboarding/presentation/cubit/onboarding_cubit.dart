@@ -1,3 +1,4 @@
+import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/onboarding/presentation/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class OnboardingCubit extends Cubit<OnBoardingState> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SplashScreen()),
+        MaterialPageRoute(builder: (context) => SignIn()),
       );
     }
   }

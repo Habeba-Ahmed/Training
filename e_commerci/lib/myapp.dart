@@ -1,5 +1,5 @@
+import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/onboarding/presentation/cubit/onboarding_cubit.dart';
-import 'package:e_commerci/feature/onboarding/presentation/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-      home: SplashScreen()
+      home: SignIn()
     )
     );
   }
