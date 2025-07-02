@@ -2,6 +2,7 @@ import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/style.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
+import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
@@ -83,7 +84,9 @@ class SignUp extends StatelessWidget {
                 hight : 140,
                 normalText: 'I Already Have an Account', 
                 actionText: 'Login', 
-                onPressed: () {},)
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignIn()));
+                },)
               
               )
           ],

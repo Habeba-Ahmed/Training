@@ -13,4 +13,5 @@
     static final Color dot=Color(0xff17223B);
     static final Color hintcolor=Color(0xff676767);
     static final Color authiconcolor=Color(0xff626262);
+    static final Color fillcolor=Color(0xffF3F3F3);
   }

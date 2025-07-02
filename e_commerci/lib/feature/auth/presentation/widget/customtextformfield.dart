@@ -28,7 +28,8 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         hintStyle: AppTextStyle.hintText,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        fillColor: AppColor.lightgrayColor.withOpacity(0.1),
+        filled: true,
+        fillColor: AppColor.fillcolor
       ),
     );
   }
