@@ -6,6 +6,7 @@ import 'package:e_commerci/feature/auth/presentation/screens/signup.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
+import 'package:e_commerci/feature/get_start/presentation/screen/getstart.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatelessWidget {
@@ -57,7 +58,10 @@ class SignIn extends StatelessWidget {
             const SizedBox(height : 30),
 
             CustomElevatedButton(
-            buttonText: 'Login', onPressed: (){}),
+            buttonText: 'Login', onPressed: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>GetStartPage()));
+
+            }),
 
             SizedBox(height : 60,),
 

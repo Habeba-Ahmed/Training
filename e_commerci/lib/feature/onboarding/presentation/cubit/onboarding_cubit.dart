@@ -1,5 +1,5 @@
 import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
-import 'package:e_commerci/feature/onboarding/presentation/screens/splash.dart';
+import 'package:e_commerci/feature/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/dataresource/static/onboarding_data.dart';

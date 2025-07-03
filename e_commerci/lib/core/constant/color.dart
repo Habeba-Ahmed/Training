@@ -2,6 +2,7 @@
 
   class AppColor{
     static final Color backgroundColor=Color(0xFFffffff);
+    static final Color getStartSubTitle=Color(0xFFF2F2F2);
     static final Color primaryColor=Color(0xFFEF426F);
     static final Color secoundColor=Color(0xFFF83758);
     static final Color ligthPinkColor=Color(0xFFFCF3F6);

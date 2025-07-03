@@ -95,5 +95,19 @@ class AppTextStyle{
             color: AppColor.primaryColor,
             fontFamily: 'Montserrat',
           );
+  static final TextStyle getStartTitle=TextStyle(
+            fontSize: 34,
+            fontWeight: FontWeight.w600,
+            color: AppColor.backgroundColor,
+            decoration: TextDecoration.none,
+            fontFamily: 'Montserrat',
+          );
+  static final TextStyle getStartSubTitle=TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: AppColor.getStartSubTitle,
+            decoration: TextDecoration.none,
+            fontFamily: 'Montserrat',
+          );
 
 }
