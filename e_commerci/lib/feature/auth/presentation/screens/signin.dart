@@ -1,6 +1,7 @@
 import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
+import 'package:e_commerci/feature/auth/presentation/cubit/auth_cubit.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/forgetpassword.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/signup.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
@@ -8,6 +9,7 @@ import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dar
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
 import 'package:e_commerci/feature/get_start/presentation/screen/getstart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -17,7 +19,9 @@ class SignIn extends StatelessWidget {
     TextEditingController usernameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
-    return Scaffold(
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: Scaffold(
       backgroundColor: AppColor.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
@@ -40,7 +44,7 @@ class SignIn extends StatelessWidget {
               controller: passwordController, 
               hintText: 'Password',
               prefixicon: Icons.lock,
-              suffixicon: Icons.remove_red_eye_outlined,
+              suffixicon: Icon(Icons.remove_red_eye_outlined),
               obscureText: true,
               ),
             
@@ -57,11 +61,30 @@ class SignIn extends StatelessWidget {
 
             const SizedBox(height : 30),
 
-            CustomElevatedButton(
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSignInSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('LogIn Successful ')),
+                  );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => GetStartPage()),
+                  );
+                } else if (state is AuthSignInFailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.message)),
+                  );
+                }
+              },
+              builder: (context, state) {
+                return CustomElevatedButton(
             buttonText: 'Login', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>GetStartPage()));
+                context.read<AuthCubit>().signIn(email: usernameController.text, password: passwordController.text);
 
-            }),
+            });
+              },
+            ),
 
             SizedBox(height : 60,),
 
@@ -80,6 +103,7 @@ class SignIn extends StatelessWidget {
           ],
         ),
       ),
+    )
     );
   }
 }

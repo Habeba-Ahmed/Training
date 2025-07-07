@@ -2,11 +2,13 @@ import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/style.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
+import 'package:e_commerci/feature/auth/presentation/cubit/auth_cubit.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -17,81 +19,109 @@ class SignUp extends StatelessWidget {
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
 
-    return Scaffold(
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: Scaffold(
       backgroundColor: AppColor.backgroundColor,
-      body: Padding(
+      body: SafeArea(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomHeaderText(headrtText: AppText.headerTextSignUp),
-
             const SizedBox(height : 30),
-
             CustomTextFormField(
               controller: usernameController, 
               hintText: 'Username or Email',
               prefixicon: Icons.person,
-              ),
-
+            ),
             const SizedBox(height : 20),
-
             CustomTextFormField(
               controller: passwordController, 
               hintText: 'Password',
               prefixicon: Icons.lock,
-              suffixicon: Icons.remove_red_eye_outlined,
+              suffixicon: Icon(Icons.remove_red_eye_outlined),
               obscureText: true,
-              ),
-
+            ),
             const SizedBox(height : 20),
-
             CustomTextFormField(
               controller: confirmPasswordController, 
-              hintText: 'ConfirmPassword',
+              hintText: 'Confirm Password',
               prefixicon: Icons.lock,
-              suffixicon: Icons.remove_red_eye_outlined,
+              suffixicon: Icon(Icons.remove_red_eye_outlined),
               obscureText: true,
-              ),
-            
+            ),
             const SizedBox(height : 30),
-
             RichText(
               text: TextSpan(
                 style: AppTextStyle.agreementText,
                 children: [
-                  TextSpan(text: 'By clicking the '),
+                  const TextSpan(text: 'By clicking the '),
                   TextSpan(
                     text: 'Register',
-                    style: TextStyle(color: AppColor.primaryColor)
+                    style: TextStyle(color: AppColor.primaryColor),
                   ),
-                  TextSpan(text: ' button, you agree\nto the public offer'),
+                  const TextSpan(text: ' button, you agree\nto the public offer'),
                 ],
               ),
             ),
-
             const SizedBox(height : 30),
-
-            CustomElevatedButton(
-            buttonText: 'Create Account', onPressed: (){}),
-
-            SizedBox(height : 60,),
-
-            Center(
-              child: 
-              CustomAuthSocialSection(
-                width : 250, 
-                hight : 140,
-                normalText: 'I Already Have an Account', 
-                actionText: 'Login', 
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignIn()));
-                },)
-              
-              )
-          ],
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSignUpSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Created Account Successfu ')),
+                  );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => SignIn()),
+                  );
+                } else if (state is AuthSignUpFailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.message)),
+                  );
+                }
+              },
+              builder: (context, state) {
+                final cubit = context.read<AuthCubit>();
+                if (state is AuthLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return CustomElevatedButton(
+                  buttonText: 'Create Account',
+                  onPressed: () {
+                    cubit.signUp(
+                      email: usernameController.text,
+                      password: passwordController.text,
+                      confirmpassword: confirmPasswordController.text
+                    );
+                  },
+                );
+              },
+            ),
+        const SizedBox(height: 60),
+        Center(
+          child: CustomAuthSocialSection(
+            width: 250,
+            hight: 140,
+            normalText: 'I Already Have an Account',
+            actionText: 'Login',
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => SignIn()),
+              );
+            },
+          ),
         ),
-      ),
+      ],
+    ),
+  ),
+),
+
+
+    )
     );
   }
 }

@@ -6,15 +6,17 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final IconData? prefixicon;
-  final IconData? suffixicon;
+  final Widget? suffixicon; // ← change this line
   final bool obscureText;
+
   const CustomTextFormField({
-    super.key, 
-    required this.controller, 
-    required this.hintText, 
-    this.prefixicon, 
-    this.obscureText=false, 
-    this.suffixicon});
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.prefixicon,
+    this.suffixicon,
+    this.obscureText = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +24,14 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
-        prefixIcon: Icon(prefixicon),
-        suffixIcon: Icon(suffixicon),
+        prefixIcon: prefixicon != null ? Icon(prefixicon) : null,
+        suffixIcon: suffixicon, // ← allow full widget
         prefixIconColor: AppColor.authiconcolor,
         hintText: hintText,
         hintStyle: AppTextStyle.hintText,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         filled: true,
-        fillColor: AppColor.fillcolor
+        fillColor: AppColor.fillcolor,
       ),
     );
   }

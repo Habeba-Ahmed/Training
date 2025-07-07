@@ -1,9 +1,9 @@
-import 'package:e_commerci/feature/onboarding/domain/entities/onboarding_entiti.dart';
 
-class OnboardingModel extends OnBoardingEntiti{
-  OnboardingModel({
-    required super.image, 
-    required super.subtitle, 
-    required super.title});
+class OnboardingModel  {
+  final String image;
+  final String title;
+  final String subtitle;
+  OnboardingModel({required this.image,required this.subtitle,required this.title});
+
 
 }

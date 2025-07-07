@@ -6,13 +6,15 @@ import 'package:e_commerci/feature/onboarding/presentation/widget/custompageview
 import 'package:e_commerci/feature/onboarding/presentation/widget/customtopbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColor.backgroundColor,
+    return BlocProvider(
+      create: (context) => OnboardingCubit(),
+      child: Scaffold(
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -23,16 +25,15 @@ class OnBoarding extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomTopBar(currentIndex: currentIndex),
-
-                    CustomPageView(),
-
-                    CustomBottomBar(currentIndex: currentIndex)
+                    const CustomPageView(),
+                    CustomBottomBar(currentIndex: currentIndex),
                   ],
                 );
               },
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
