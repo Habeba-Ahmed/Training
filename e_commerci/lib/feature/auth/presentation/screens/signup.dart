@@ -1,4 +1,5 @@
 import 'package:e_commerci/core/constant/color.dart';
+import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/style.dart';
 import 'package:e_commerci/core/translate/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
@@ -9,6 +10,8 @@ import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dar
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -79,10 +82,7 @@ class SignUp extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(text.keys['17']!)), // Created Account Successfully
                       );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignIn()),
-                      );
+                      Get.offNamed(AppRoutes.signin);
                     } else if (state is AuthSignUpFailedFireBase) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(state.message)),
@@ -116,10 +116,7 @@ class SignUp extends StatelessWidget {
                     normalText: text.keys['18']!, // I Already Have an Account
                     actionText: text.keys['19']!, // Login
                     onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignIn()),
-                      );
+                      Get.offNamed(AppRoutes.signin);
                     },
                   ),
                 ),
