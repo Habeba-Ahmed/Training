@@ -2,7 +2,7 @@ import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/style.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
-import 'package:e_commerci/feature/auth/presentation/cubit/auth_cubit.dart';
+import 'package:e_commerci/feature/auth/presentation/cubit/FireBase/auth_cubit.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dart';
@@ -20,7 +20,7 @@ class SignUp extends StatelessWidget {
     TextEditingController confirmPasswordController = TextEditingController();
 
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => AuthCubitFireBase(),
       child: Scaffold(
       backgroundColor: AppColor.backgroundColor,
       body: SafeArea(
@@ -67,9 +67,9 @@ class SignUp extends StatelessWidget {
               ),
             ),
             const SizedBox(height : 30),
-            BlocConsumer<AuthCubit, AuthState>(
+            BlocConsumer<AuthCubitFireBase, AuthStateFireBase>(
               listener: (context, state) {
-                if (state is AuthSignUpSuccess) {
+                if (state is AuthSignUpSuccessFireBase) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Created Account Successfu ')),
                   );
@@ -77,33 +77,33 @@ class SignUp extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (_) => SignIn()),
                   );
-                } else if (state is AuthSignUpFailed) {
+                } else if (state is AuthSignUpFailedFireBase) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(state.message)),
                   );
                 }
               },
               builder: (context, state) {
-                final cubit = context.read<AuthCubit>();
-                if (state is AuthLoading) {
+                final cubit = context.read<AuthCubitFireBase>();
+                if (state is AuthLoadingFireBase) {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return CustomElevatedButton(
                   buttonText: 'Create Account',
                   onPressed: () {
                     cubit.signUp(
-                      email: usernameController.text,
-                      password: passwordController.text,
+                      email: usernameController.text.trim(),
+                      password: passwordController.text.trim(),
                       confirmpassword: confirmPasswordController.text
                     );
                   },
                 );
               },
             ),
-        const SizedBox(height: 60),
+        const SizedBox(height : 60),
         Center(
           child: CustomAuthSocialSection(
-            width: 250,
+            width : 250,
             hight: 140,
             normalText: 'I Already Have an Account',
             actionText: 'Login',

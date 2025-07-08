@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerci/feature/auth/data/auth_data.dart';
+import 'package:e_commerci/feature/auth/data/auth_data_supabase.dart';
 
 part 'auth_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+class AuthCubitSupaBase extends Cubit<AuthStateSupaBase> {
+  AuthCubitSupaBase() : super(AuthInitial());
 
-  AuthDate data=AuthDate();
+  AuthDateSupabase data=AuthDateSupabase();
 
 
 Future<void> signUp({

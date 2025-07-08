@@ -1,13 +1,22 @@
+import 'package:e_commerci/core/shared/constant.dart';
 import 'package:e_commerci/myapp.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Supabase.initialize(
-    url: 'https://hhohpxukgoiptspoqwfi.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhob2hweHVrZ29pcHRzcG9xd2ZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4MTE5MDAsImV4cCI6MjA2NzM4NzkwMH0.hHPMVzumbIXijDoqqItuVV0CbqCGk0DTQXE5L0K3gpM',
-  );
+  if(kIsWeb){
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: Constants.apiKey,
+            appId: Constants.appId,
+            messagingSenderId: Constants.messagingSenderId,
+            projectId: Constants.projectId));
+  }
+
+  else{
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
-

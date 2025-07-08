@@ -1,6 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthDate {
+class AuthDateSupabase {
   final _supabase = Supabase.instance.client;
 
   Future<(bool success, String? error)> signUp({

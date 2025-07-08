@@ -1,7 +1,7 @@
 import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
-import 'package:e_commerci/feature/auth/presentation/cubit/auth_cubit.dart';
+import 'package:e_commerci/feature/auth/presentation/cubit/firebase/auth_cubit.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/forgetpassword.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/signup.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
@@ -11,99 +11,120 @@ import 'package:e_commerci/feature/get_start/presentation/screen/getstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
   @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => AuthCubitFireBase(),
       child: Scaffold(
-      backgroundColor: AppColor.backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomHeaderText(headrtText: AppText.headerTextSignIn),
+        backgroundColor: AppColor.backgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomHeaderText(headrtText: AppText.headerTextSignIn),
+              const SizedBox(height : 30),
 
-            const SizedBox(height : 30),
+              CustomTextFormField(
+                controller: usernameController,
+                hintText: 'Username or Email',
+                prefixicon: Icons.person,
+              ),
+              const SizedBox(height : 20),
 
-            CustomTextFormField(
-              controller: usernameController, 
-              hintText: 'Username or Email',
-              prefixicon: Icons.person,
+              CustomTextFormField(
+                controller: passwordController,
+                hintText: 'Password',
+                prefixicon: Icons.lock,
+                suffixicon: const Icon(Icons.remove_red_eye_outlined),
+                obscureText: true,
               ),
 
-            const SizedBox(height : 20),
-
-            CustomTextFormField(
-              controller: passwordController, 
-              hintText: 'Password',
-              prefixicon: Icons.lock,
-              suffixicon: Icon(Icons.remove_red_eye_outlined),
-              obscureText: true,
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => ForgetPassword()));
+                  },
+                  child: Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                        color: AppColor.secoundColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12),
+                  ),
+                ),
               ),
-            
+              const SizedBox(height : 30),
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ForgetPassword()));
+              BlocConsumer<AuthCubitFireBase, AuthStateFireBase>(
+                listener: (context, state) {
+                  if (state is AuthSignInSuccessFireBase) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('LogIn Successful')),
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const GetStartPage()),
+                    );
+                  } else if (state is AuthSignInFailedFireBase) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
+                  }
                 },
-                child: Text('Forgot Password?', style: TextStyle(color: AppColor.secoundColor,fontWeight: FontWeight.w400,fontSize: 12)),
+                builder: (context, state) {
+                  if (state is AuthLoadingFireBase) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return CustomElevatedButton(
+                    buttonText: 'Login',
+                    onPressed: () {
+                      context.read<AuthCubitFireBase>().signIn(
+                          email: usernameController.text.trim(),
+                          password: passwordController.text.trim());
+                    },
+                  );
+                },
               ),
-            ),
 
-            const SizedBox(height : 30),
+              const SizedBox(height : 60),
 
-            BlocConsumer<AuthCubit, AuthState>(
-              listener: (context, state) {
-                if (state is AuthSignInSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('LogIn Successful ')),
-                  );
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => GetStartPage()),
-                  );
-                } else if (state is AuthSignInFailed) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
-                  );
-                }
-              },
-              builder: (context, state) {
-                return CustomElevatedButton(
-            buttonText: 'Login', onPressed: (){
-                context.read<AuthCubit>().signIn(email: usernameController.text, password: passwordController.text);
-
-            });
-              },
-            ),
-
-            SizedBox(height : 60,),
-
-            Center(
-              child: 
-              CustomAuthSocialSection(
-                normalText: 'Create An Account', 
-                actionText: 'Sign Up', 
-                width : 194, 
-                hight : 136,
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUp()));
-                }, )
-              
+              Center(
+                child: CustomAuthSocialSection(
+                  normalText: 'Create An Account',
+                  actionText: 'Sign Up',
+                  width : 194,
+                  hight: 136,
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => const SignUp()));
+                  },
+                ),
               )
-          ],
+            ],
+          ),
         ),
       ),
-    )
     );
   }
 }
