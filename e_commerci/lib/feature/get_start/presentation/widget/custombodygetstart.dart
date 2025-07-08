@@ -1,11 +1,10 @@
 import 'package:e_commerci/core/cache/chachehelper.dart';
 import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/style.dart';
-import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/translate/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
-import 'package:e_commerci/feature/home_page/presentation/screens/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -16,7 +15,7 @@ class CustomBodyGetStart extends StatelessWidget {
   Widget build(BuildContext context) {
     AppText text=AppText();
     return Column(
-      spacing: 16,
+      spacing: 16.h,
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -41,7 +40,7 @@ class CustomBodyGetStart extends StatelessWidget {
           },
         ),
       ),
-      const SizedBox(height : 40), 
+      SizedBox(height : 40.h), 
     ],
   );
   }

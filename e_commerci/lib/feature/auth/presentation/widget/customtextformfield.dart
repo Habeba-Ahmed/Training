@@ -25,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         prefixIcon: prefixicon != null ? Icon(prefixicon) : null,
-        suffixIcon: suffixicon, // ← allow full widget
+        suffixIcon: suffixicon,
         prefixIconColor: AppColor.authiconcolor,
         hintText: hintText,
         hintStyle: AppTextStyle.hintText,

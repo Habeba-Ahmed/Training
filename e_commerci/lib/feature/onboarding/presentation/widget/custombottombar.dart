@@ -5,6 +5,7 @@ import 'package:e_commerci/feature/onboarding/presentation/cubit/onboarding_cubi
 import 'package:e_commerci/feature/onboarding/presentation/widget/customdotindicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBottomBar extends StatelessWidget {
   final int currentIndex;
@@ -19,7 +20,7 @@ class CustomBottomBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         currentIndex == 0
-            ? const SizedBox(width : 70)
+            ? SizedBox(width : 70.w)
             : TextButton(
                 onPressed: () {
                   cubit.prevPage(context);

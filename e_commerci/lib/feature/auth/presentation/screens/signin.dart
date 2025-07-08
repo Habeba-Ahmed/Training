@@ -1,7 +1,6 @@
 import 'package:e_commerci/core/cache/chachehelper.dart';
 import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/routes/routes.dart';
-import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
 import 'package:e_commerci/feature/auth/presentation/cubit/firebase/auth_cubit.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
@@ -9,8 +8,8 @@ import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dar
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/translate/text.dart';
 
 class SignIn extends StatefulWidget {
@@ -40,19 +39,19 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         backgroundColor: AppColor.backgroundColor,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.0.w, vertical: 48.0.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomHeaderText(headrtText: text.keys['2']!), // "Welcome \nBack!"
-              const SizedBox(height : 30),
+              SizedBox(height : 30.h),
 
               CustomTextFormField(
                 controller: usernameController,
                 hintText: text.keys['5']!, // "Username or Email"
                 prefixicon: Icons.person,
               ),
-              const SizedBox(height : 20),
+              SizedBox(height : 20.h),
 
               CustomTextFormField(
                 controller: passwordController,
@@ -73,11 +72,12 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(
                         color: AppColor.secoundColor,
                         fontWeight: FontWeight.w400,
-                        fontSize: 12),
+                        fontSize: 12.sp
+                        ),
                   ),
                 ),
               ),
-              const SizedBox(height : 30),
+              SizedBox(height : 30.h),
 
               BlocConsumer<AuthCubitFireBase, AuthStateFireBase>(
                 listener: (context, state) {
@@ -113,8 +113,8 @@ class _SignInState extends State<SignIn> {
                 child: CustomAuthSocialSection(
                   normalText: text.keys['11']!, // "Create an account"
                   actionText: text.keys['8']!, // "Sign Up"
-                  width : 194,
-                  hight: 136,
+                  width : 194.w,
+                  hight: 150.h,
                   onPressed: () {
                     Get.offAndToNamed(AppRoutes.signUp);
                   },

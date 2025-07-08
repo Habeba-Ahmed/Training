@@ -1,14 +1,12 @@
 
-import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/images.dart';
 import 'package:e_commerci/core/constant/routes/redirectroute.dart';
 import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/style.dart';
-import 'package:e_commerci/core/constant/text.dart';
-import 'package:e_commerci/feature/onboarding/presentation/screens/onboarding.dart';
+import 'package:e_commerci/core/translate/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -38,21 +36,21 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Center(
           child: SizedBox(
-            width : 275,
-            height : 100,
+            width : 275.w,
+            height : 100.h,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               SizedBox(
-                width : 125,
-                height : 100,
+                width : 125.w,
+                height : 100.h,
                 child: Image.asset(AppImages.logo),
               ),
               
-              const SizedBox(width : 10),
+              SizedBox(width : 10.w),
 
               Text(
-                '1'.tr,
+                AppText().keys['1']!,
                 style: AppTextStyle.logoStyle
               ),
             ],

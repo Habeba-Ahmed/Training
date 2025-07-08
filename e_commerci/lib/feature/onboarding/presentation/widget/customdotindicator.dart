@@ -1,6 +1,7 @@
 import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/feature/onboarding/data/dataresource/static/onboarding_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDotIndicator extends StatelessWidget {
   final int currentIndex;
@@ -13,9 +14,9 @@ class CustomDotIndicator extends StatelessWidget {
         ...List.generate(
       onBoardingList.length,
       (index) => AnimatedContainer(
-        margin: const EdgeInsets.symmetric(horizontal: 2),
-        width : currentIndex == index?40:10,
-        height : 10,
+        margin: EdgeInsets.symmetric(horizontal: 2.w),
+        width : currentIndex == index?40.w:10.w,
+        height : 10.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: currentIndex == index

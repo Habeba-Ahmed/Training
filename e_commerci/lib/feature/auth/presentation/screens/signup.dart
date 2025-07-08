@@ -10,6 +10,7 @@ import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dar
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -29,19 +30,19 @@ class SignUp extends StatelessWidget {
         backgroundColor: AppColor.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+            padding: EdgeInsets.symmetric(horizontal: 24.0.w, vertical: 48.0.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomHeaderText(headrtText: text.keys['4']!), // Create Account
-                const SizedBox(height : 30),
+                SizedBox(height : 30.h),
 
                 CustomTextFormField(
                   controller: usernameController,
                   hintText: text.keys['6']!, // Username or Email
                   prefixicon: Icons.person,
                 ),
-                const SizedBox(height : 20),
+                SizedBox(height : 20.h),
 
                 CustomTextFormField(
                   controller: passwordController,
@@ -50,7 +51,7 @@ class SignUp extends StatelessWidget {
                   suffixicon: const Icon(Icons.remove_red_eye_outlined),
                   obscureText: true,
                 ),
-                const SizedBox(height : 20),
+                SizedBox(height : 20.h),
 
                 CustomTextFormField(
                   controller: confirmPasswordController,
@@ -59,7 +60,7 @@ class SignUp extends StatelessWidget {
                   suffixicon: const Icon(Icons.remove_red_eye_outlined),
                   obscureText: true,
                 ),
-                const SizedBox(height : 30),
+                SizedBox(height : 30.h),
 
                 RichText(
                   text: TextSpan(
@@ -74,7 +75,7 @@ class SignUp extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height  : 30),
+                SizedBox(height  : 30.h),
 
                 BlocConsumer<AuthCubitFireBase, AuthStateFireBase>(
                   listener: (context, state) {
@@ -107,12 +108,12 @@ class SignUp extends StatelessWidget {
                   },
                 ),
 
-                const SizedBox(height : 60),
+                SizedBox(height : 60.h),
 
                 Center(
                   child: CustomAuthSocialSection(
-                    width : 250,
-                    hight: 140,
+                    width : 250.w,
+                    hight: 150.h,
                     normalText: text.keys['18']!, // I Already Have an Account
                     actionText: text.keys['19']!, // Login
                     onPressed: () {
