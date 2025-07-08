@@ -1,4 +1,6 @@
+import 'package:e_commerci/core/cache/chachehelper.dart';
 import 'package:e_commerci/core/constant/color.dart';
+import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
 import 'package:e_commerci/feature/auth/presentation/cubit/firebase/auth_cubit.dart';
@@ -10,6 +12,7 @@ import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.
 import 'package:e_commerci/feature/get_start/presentation/screen/getstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -62,8 +65,7 @@ class _SignInState extends State<SignIn> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => ForgetPassword()));
+                    Get.offAndToNamed(AppRoutes.forgetPassword);
                   },
                   child: Text(
                     'Forgot Password?',
@@ -82,10 +84,8 @@ class _SignInState extends State<SignIn> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('LogIn Successful')),
                     );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (_) => const GetStartPage()),
-                    );
+                    Chachehelper.setDate(key: 'step', value: '2');
+                    Get.offAndToNamed(AppRoutes.getStart);
                   } else if (state is AuthSignInFailedFireBase) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),
@@ -116,8 +116,7 @@ class _SignInState extends State<SignIn> {
                   width : 194,
                   hight: 136,
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => const SignUp()));
+                    Get.offAndToNamed(AppRoutes.signUp);
                   },
                 ),
               )

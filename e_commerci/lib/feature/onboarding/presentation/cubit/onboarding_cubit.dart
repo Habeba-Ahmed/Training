@@ -1,3 +1,4 @@
+import 'package:e_commerci/core/cache/chachehelper.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class OnboardingCubit extends Cubit<OnBoardingState> {
       );
       emit(OnBoardingPageChanged(currentPage));
     } else {
+      Chachehelper.setDate(key: 'step', value: '1');
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SignIn()),

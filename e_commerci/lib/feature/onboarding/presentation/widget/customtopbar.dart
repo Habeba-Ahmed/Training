@@ -1,8 +1,9 @@
+import 'package:e_commerci/core/cache/chachehelper.dart';
+import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/style.dart';
-import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/onboarding/data/dataresource/static/onboarding_data.dart';
-import 'package:e_commerci/feature/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomTopBar extends StatelessWidget {
   final int currentIndex; 
@@ -22,7 +23,8 @@ class CustomTopBar extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignIn()));
+            Chachehelper.setDate(key: 'step', value: '1');
+            Get.offAllNamed(AppRoutes.signin);
           },
           child: Text('Skip', style: AppTextStyle.skipStyle),
         ),

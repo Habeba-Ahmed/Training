@@ -1,8 +1,12 @@
+import 'package:e_commerci/core/cache/chachehelper.dart';
+import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/style.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
 import 'package:e_commerci/feature/home_page/presentation/screens/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CustomBodyGetStart extends StatelessWidget {
   const CustomBodyGetStart({super.key});
@@ -30,7 +34,8 @@ class CustomBodyGetStart extends StatelessWidget {
         child: CustomElevatedButton(
           buttonText: 'Get Start',
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+            Chachehelper.setDate(key: 'step', value: '3');
+            Get.offAllNamed(AppRoutes.homepage);
           },
         ),
       ),
