@@ -25,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 2), () {
       final redirectRoute = ReDirectRoute.redirect(null).name;
-      print("🔁 Redirecting to: $redirectRoute");
       if (redirectRoute != null) {
         Get.offAllNamed(redirectRoute);
       } else {
@@ -53,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               const SizedBox(width : 10),
 
               Text(
-                AppText.logoText,
+                '1'.tr,
                 style: AppTextStyle.logoStyle
               ),
             ],

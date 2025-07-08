@@ -8,7 +8,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   Chachehelper.cacheInitialization();
- 
+
   if(kIsWeb){
     await Firebase.initializeApp(
         options: FirebaseOptions(

@@ -4,15 +4,14 @@ import 'package:e_commerci/core/constant/routes/routes.dart';
 import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
 import 'package:e_commerci/feature/auth/presentation/cubit/firebase/auth_cubit.dart';
-import 'package:e_commerci/feature/auth/presentation/screens/forgetpassword.dart';
-import 'package:e_commerci/feature/auth/presentation/screens/signup.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customaddsocialsection.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
-import 'package:e_commerci/feature/get_start/presentation/screen/getstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/translate/text.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -34,6 +33,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    AppText text=AppText();
+    
     return BlocProvider(
       create: (context) => AuthCubitFireBase(),
       child: Scaffold(
@@ -43,19 +44,19 @@ class _SignInState extends State<SignIn> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomHeaderText(headrtText: AppText.headerTextSignIn),
+              CustomHeaderText(headrtText: text.keys['2']!), // "Welcome \nBack!"
               const SizedBox(height : 30),
 
               CustomTextFormField(
                 controller: usernameController,
-                hintText: 'Username or Email',
+                hintText: text.keys['5']!, // "Username or Email"
                 prefixicon: Icons.person,
               ),
               const SizedBox(height : 20),
 
               CustomTextFormField(
                 controller: passwordController,
-                hintText: 'Password',
+                hintText: text.keys['6']!, // "Password"
                 prefixicon: Icons.lock,
                 suffixicon: const Icon(Icons.remove_red_eye_outlined),
                 obscureText: true,
@@ -68,7 +69,7 @@ class _SignInState extends State<SignIn> {
                     Get.offAndToNamed(AppRoutes.forgetPassword);
                   },
                   child: Text(
-                    'Forgot Password?',
+                    text.keys['10']!, // "Forgot Password?"
                     style: TextStyle(
                         color: AppColor.secoundColor,
                         fontWeight: FontWeight.w400,
@@ -82,7 +83,7 @@ class _SignInState extends State<SignIn> {
                 listener: (context, state) {
                   if (state is AuthSignInSuccessFireBase) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('LogIn Successful')),
+                      SnackBar(content: Text(text.keys['9']!)), // "LogIn Successful"
                     );
                     Chachehelper.setDate(key: 'step', value: '2');
                     Get.offAndToNamed(AppRoutes.getStart);
@@ -97,7 +98,7 @@ class _SignInState extends State<SignIn> {
                     return const Center(child: CircularProgressIndicator());
                   }
                   return CustomElevatedButton(
-                    buttonText: 'Login',
+                    buttonText: text.keys['7']!, // "Login"
                     onPressed: () {
                       context.read<AuthCubitFireBase>().signIn(
                           email: usernameController.text.trim(),
@@ -106,13 +107,12 @@ class _SignInState extends State<SignIn> {
                   );
                 },
               ),
-
               const SizedBox(height : 60),
 
               Center(
                 child: CustomAuthSocialSection(
-                  normalText: 'Create An Account',
-                  actionText: 'Sign Up',
+                  normalText: text.keys['11']!, // "Create an account"
+                  actionText: text.keys['8']!, // "Sign Up"
                   width : 194,
                   hight: 136,
                   onPressed: () {

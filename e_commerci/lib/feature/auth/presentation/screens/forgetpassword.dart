@@ -1,32 +1,35 @@
+import 'package:e_commerci/core/translate/text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:e_commerci/core/constant/color.dart';
 import 'package:e_commerci/core/constant/style.dart';
-import 'package:e_commerci/core/constant/text.dart';
 import 'package:e_commerci/core/widget/customelevatedbutton.dart';
 import 'package:e_commerci/feature/auth/presentation/cubit/firebase/auth_cubit.dart';
 import 'package:e_commerci/feature/auth/presentation/screens/signin.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customheadertext.dart';
 import 'package:e_commerci/feature/auth/presentation/widget/customtextformfield.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
+class ForgetPassword extends StatelessWidget {
+  ForgetPassword({super.key});
 
-  @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
-}
-
-class _ForgetPasswordState extends State<ForgetPassword> {
   final TextEditingController _emailController = TextEditingController();
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
+  void _onSubmit(BuildContext context) {
+    final email = _emailController.text.trim();
+    if (email.isEmpty || !email.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('23'.tr)), // Please enter a valid email
+      );
+      return;
+    }
+    context.read<AuthCubitFireBase>().resetPassword(email: email);
   }
 
   @override
   Widget build(BuildContext context) {
+    AppText text=AppText();
+
     return BlocProvider(
       create: (_) => AuthCubitFireBase(),
       child: Scaffold(
@@ -36,12 +39,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomHeaderText(headrtText: AppText.headerTextforgetPassword),
+              CustomHeaderText(headrtText: text.keys['4']!), // Forgot password?
               const SizedBox(height : 30),
 
               CustomTextFormField(
                 controller: _emailController,
-                hintText: 'Enter your email address',
+                hintText: text.keys['20']!, // Enter your email address
                 prefixicon: Icons.email,
               ),
               const SizedBox(height : 20),
@@ -51,12 +54,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   style: AppTextStyle.agreementText,
                   children: [
                     TextSpan(
-                      text: '* ',
+                      text: text.keys['25']!,  // *
                       style: TextStyle(color: AppColor.primaryColor),
                     ),
-                    const TextSpan(
-                      text:
-                          'We will send you a message to set or reset \nyour new password',
+                    TextSpan(
+                      text: text.keys['21']!, // Message for resetting password
                     ),
                   ],
                 ),
@@ -67,12 +69,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 listener: (context, state) {
                   if (state is AuthResetPasswordSuccessFireBase) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Password reset email sent')),
+                      SnackBar(content: Text(text.keys['24']!)), // Password reset email sent
                     );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (_) => const SignIn()),
-                    );
+                    Get.off(() => const SignIn());
                   } else if (state is AuthResetPasswordFailedFireBase) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),
@@ -85,17 +84,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   }
 
                   return CustomElevatedButton(
-                    buttonText: 'Submit',
-                    onPressed: () {
-                      final email = _emailController.text.trim();
-                      if (email.isEmpty || !email.contains('@')) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Please enter a valid email')),
-                        );
-                        return;
-                      }
-                      context.read<AuthCubitFireBase>().resetPassword(email: email);
-                    },
+                    buttonText: text.keys['22']!, // Submit
+                    onPressed: () => _onSubmit(context),
                   );
                 },
               ),

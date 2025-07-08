@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "199282648739",
-    "project_id": "ecommerci-b6d4a",
-    "storage_bucket": "ecommerci-b6d4a.firebasestorage.app"
+    "project_number": "601678441998",
+    "project_id": "ecommerci-145eb",
+    "storage_bucket": "ecommerci-145eb.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:199282648739:android:4d2a03ee284416394d0116",
+        "mobilesdk_app_id": "1:601678441998:android:350e3eae76d4b02e5e165f",
         "android_client_info": {
           "package_name": "com.example.e_commerci"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAaaVVLhUoDkCwAliWLkP7gx60-KPHJuVc"
+          "current_key": "AIzaSyDywLljVg-iQK94uOEnlRJIzIUJs0nLthk"
         }
       ],
       "services": {

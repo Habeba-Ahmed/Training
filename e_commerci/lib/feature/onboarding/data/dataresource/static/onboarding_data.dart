@@ -1,22 +1,21 @@
 import 'package:e_commerci/core/constant/images.dart';
+import 'package:e_commerci/core/translate/text.dart';
 import 'package:e_commerci/feature/onboarding/data/model/onboarding_model.dart';
 
-List<OnboardingModel> onBoardingList=[
+List<OnboardingModel> onBoardingList = [
   OnboardingModel(
-    image: AppImages.onboarding1, 
-    subtitle: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.', 
-    title: 'Choose Products'),
-
-    
+    image: AppImages.onboarding1,
+    title: AppText().keys['29']!,     // "Choose Products"
+    subtitle: AppText().keys['30']!,  // Onboarding description
+  ),
   OnboardingModel(
-    image: AppImages.onboarding2, 
-    subtitle: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.', 
-    title: 'Make Payment'),
-
+    image: AppImages.onboarding2,
+    title: AppText().keys['31']!,     // "Make Payment"
+    subtitle: AppText().keys['30']!,
+  ),
   OnboardingModel(
-    image: AppImages.onboarding3, 
-    subtitle: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.', 
-    title: 'Get Your Order'),
-
-    
+    image: AppImages.onboarding3,
+    title: AppText().keys['23']!,     // "Get Your Order"
+    subtitle: AppText().keys['30']!,
+  ),
 ];

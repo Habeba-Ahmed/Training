@@ -1,5 +1,5 @@
 class AppRoutes{
-  static const String splash="/splash";
+  static const String splash="/";
   static const String onBoarding="/onboarding";
   static const String signin="/signin";
   static const String signUp="/signup";

@@ -15,7 +15,7 @@ var routes = [
   GetPage(name: AppRoutes.onBoarding, page: () => const OnBoarding()),
   GetPage(name: AppRoutes.signin, page: () => const SignIn()),
   GetPage(name: AppRoutes.signUp, page: () => const SignUp()),
-  GetPage(name: AppRoutes.forgetPassword, page: () => const ForgetPassword()),
+  GetPage(name: AppRoutes.forgetPassword, page: () => ForgetPassword()),
   GetPage(name: AppRoutes.getStart, page: () => const GetStartPage()),
   GetPage(name: AppRoutes.homepage, page: () => const HomePage()),
 
